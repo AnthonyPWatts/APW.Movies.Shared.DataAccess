@@ -50,10 +50,12 @@ internal sealed class MoviesDbContext : DbContext, IMoviesDbContext
 
             entity.HasOne(d => d.Actor).WithMany()
                 .HasForeignKey(d => d.ActorId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__MoviesAct__Actor__286302EC");
 
             entity.HasOne(d => d.Movie).WithMany()
                 .HasForeignKey(d => d.MovieId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__MoviesAct__Movie__276EDEB3");
         });
     }
