@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 var moviesDbConnectionString = builder.Configuration.GetConnectionString("MoviesDB") ?? 
     throw new InvalidOperationException("MoviesDB connection string is missing");
 
-builder.Services.AddDataAccess(moviesDbConnectionString);
+builder.Services.AddMovieDataAccess(moviesDbConnectionString);
 builder.Services.AddRazorPages();
 
 var app = builder.Build();

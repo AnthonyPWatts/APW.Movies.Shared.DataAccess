@@ -5,7 +5,7 @@ VisualStudioVersion = 17.10.34818.151
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthonyPWatts.Movies.Shared.DataAccess", "AnthonyPWatts.Movies.Shared.DataAccess\AnthonyPWatts.Movies.Shared.DataAccess.csproj", "{C45FD06F-AEF3-41A9-B376-4B4C718D2C50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManualTestRig", "ManualTestRig\ManualTestRig.csproj", "{1F0DE2AA-5A7A-4789-85D3-3B4872212C99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManualTestRig", "ManualTestRig\ManualTestRig.csproj", "{1F0DE2AA-5A7A-4789-85D3-3B4872212C99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

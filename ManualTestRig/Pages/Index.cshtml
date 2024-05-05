@@ -28,9 +28,8 @@
                         <td>@movie.Director</td>
                         <td>@movie.ReleaseYear</td>
                         <td>
-                            <button class="btn btn-sm btn-secondary" asp-page="./Details" asp-route-id="@movie.ID">Details</button>
-                            <button class="btn btn-sm btn-warning" asp-page="./Edit" asp-route-id="@movie.ID">Edit</button>
-                            <button class="btn btn-sm btn-danger" asp-page="./Delete" asp-route-id="@movie.ID">Delete</button>
+                            <a class="btn btn-sm btn-secondary" asp-page="./Edit" asp-route-id="@movie.ID">Edit</a>
+                            <a class="btn btn-sm btn-danger" asp-page="./Delete" asp-route-id="@movie.ID">Delete</a>
                         </td>
                     </tr>
                 }

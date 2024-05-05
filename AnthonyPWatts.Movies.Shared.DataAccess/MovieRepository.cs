@@ -28,19 +28,16 @@ public sealed class MovieRepository(IMoviesDbContext context) : IMovieRepository
 
     public async Task<bool> DeleteAsync(int id)
     {
-        var movie = await _context.Movies
-            .FirstOrDefaultAsync(x => x.Id == id);
+        var movie = await _context.Movies.FindAsync(id);
 
-        if (movie == null)
+        if (movie is not null)
         {
-            return true;
-        }    
+            _context.Movies.Remove(movie);
+            await _context.SaveChangesAsync();
+        }
 
-        _context.Movies.Remove(movie);
-        await _context.SaveChangesAsync();
-
-        return await _context.Movies
-            .FirstOrDefaultAsync(x => x.Id == id) == null;
+        // Make sure it is gone
+        return !(await _context.Movies.AnyAsync(x => x.Id == id));
     }
 
     public async Task<IEnumerable<MovieDto>> GetAllAsync()
@@ -52,16 +49,14 @@ public sealed class MovieRepository(IMoviesDbContext context) : IMovieRepository
 
     public async Task<MovieDto?> GetByIdAsync(int id)
     {
-        var movie = await _context.Movies
-            .FirstOrDefaultAsync(x => x.Id == id);
+        var movie = await _context.Movies.FindAsync(id);
 
         return movie?.ToDto();
     }
 
     public async Task<MovieDto?> UpdateAsync(MovieDto movie)
     {
-        var existingMovie = await _context.Movies
-            .FirstOrDefaultAsync(x => x.Id == movie.ID);
+        var existingMovie = await _context.Movies.FindAsync(movie.ID);
 
         if (existingMovie == null)
             return null;

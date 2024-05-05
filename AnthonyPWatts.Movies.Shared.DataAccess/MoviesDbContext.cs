@@ -60,8 +60,9 @@ internal sealed class MoviesDbContext : DbContext, IMoviesDbContext
         });
     }
 
-    public async Task<int> SaveChangesAsync()
+    // Need to explicitly implement this because it's an interface member
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        return await base.SaveChangesAsync();
+        return await base.SaveChangesAsync(cancellationToken);
     }
 }

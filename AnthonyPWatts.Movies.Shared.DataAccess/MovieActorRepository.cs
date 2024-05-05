@@ -23,21 +23,16 @@ public sealed class MovieActorRepository(IMoviesDbContext context) : IMovieActor
 
     public async Task<bool> DeleteAsync(int movieId, int actorId)
     {
-        var movieActor = await _context.MoviesActors
-            .FirstOrDefaultAsync(x => x.MovieId == movieId && x.ActorId == actorId);
+        var movieActor = await _context.MoviesActors.SingleOrDefaultAsync(x => x.MovieId == movieId && x.ActorId == actorId);
 
-        if (movieActor == null)
+        if (movieActor is not null)
         {
-            return true;
+            _context.MoviesActors.Remove(movieActor);
+            await _context.SaveChangesAsync();
         }
 
-        _context.MoviesActors.Remove(movieActor);
-        await _context.SaveChangesAsync();
-
-        var movieActorDeleted = await _context.MoviesActors
-            .FirstOrDefaultAsync(x => x.MovieId == movieId && x.ActorId == actorId);
-
-        return movieActorDeleted is null;
+        // Make sure it is gone
+        return !(await _context.MoviesActors.AnyAsync(x => x.MovieId == movieId && x.ActorId == actorId));
     }
 
     public async Task<IEnumerable<MovieActorDto>> GetAllAsync()

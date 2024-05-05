@@ -1,0 +1,48 @@
+﻿@page
+@model ManualTestRig.Pages.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete Movie";
+}
+
+<h3>Delete Movie?</h3>
+
+<div class="row">
+    <div class="col-12">
+        <table class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Genre</th>
+                    <th>Director</th>
+                    <th>Release Year</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(Model.Movie != null)
+                {
+                    <tr>
+                        <td>@Model.Movie.Title</td>
+                        <td>@Model.Movie.Genre</td>
+                        <td>@Model.Movie.Director</td>
+                        <td>@Model.Movie.ReleaseYear</td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4">Movie not found</td>
+                    </tr>
+                }                
+            </tbody>
+        </table>
+
+        @if(Model.Movie != null)
+        {
+            <form method="post">
+                <button class="btn btn-danger" type="submit">Delete</button>
+                <a class="btn btn-secondary" asp-page="./Index">Cancel</a>
+            </form>
+        }
+    </div>
+</div>

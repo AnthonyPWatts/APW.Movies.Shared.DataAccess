@@ -7,7 +7,7 @@ namespace Movies.Shared.DataAccess;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddDataAccess(this IServiceCollection services, string connectionString)
+    public static IServiceCollection AddMovieDataAccess(this IServiceCollection services, string connectionString)
     {
         services.AddDbContext<MoviesDbContext>(options =>
         {

@@ -10,6 +10,5 @@ public interface IMoviesDbContext
     internal DbSet<Actor> Actors { get; set; }
 
     internal DbSet<MovieActor> MoviesActors { get; set; }
-
-    internal Task<int> SaveChangesAsync();
+    internal Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

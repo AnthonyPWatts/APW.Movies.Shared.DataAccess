@@ -33,16 +33,13 @@ public sealed class ActorRepository(IMoviesDbContext context) : IActorRepository
         var actor = await _context.Actors
             .FirstOrDefaultAsync(x => x.Id == id);
 
-        if (actor == null)
+        if (actor is not null)
         {
-            return true;
-        }
+            _context.Actors.Remove(actor);
+            await _context.SaveChangesAsync();
+        }        
 
-        _context.Actors.Remove(actor);
-        await _context.SaveChangesAsync();
-
-        return await _context.Actors
-            .FirstOrDefaultAsync(x => x.Id == id) == null;
+        return !(await _context.Actors.AnyAsync(x => x.Id == id));
     }
 
     public async Task<IEnumerable<ActorDto>> GetAllAsync()
